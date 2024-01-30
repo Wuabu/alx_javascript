@@ -17,4 +17,4 @@ module.exports.add = function add(num1, num2) {
 const add = require('./13-add').add;
 
 // Call the add function with arguments 3 and 5 and print the result
-console.log(add(num1, num2));
+console.log(add( "", ""));
