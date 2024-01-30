@@ -1,5 +1,5 @@
-const myVar ="C is fun"
-const myVar1 ="Python is cool"
-const myVar2 ="JavaScript is amazing"
+const lines =["C is fun","Python is cool", "JavaScript is amazing"];
 
-console.log(myVar)
+for(const line of lines); {
+    console.log(lines)
+}
