@@ -1,7 +1,7 @@
-const lines = ["C is fun","Python is cool", "JavaScript is amazing"];
+const myVar = ["C is fun","Python is cool", "JavaScript is amazing"];
 
-for (const line of lines) {
-    console.log(lines);
+for (const line of myVar) {
+    console.log(line);
 }
 
 
