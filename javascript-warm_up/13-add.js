@@ -15,6 +15,7 @@ module.exports.add = function add(num1, num2) {
 
 // Import the add function from 13-add.js
 const add = require('./13-add').add;
-
+const num1 = parseInt(prompt('Enter the first number: '), 10);
+const num2 = parseInt(prompt('Enter the second number: '), 10);
 // Call the add function with arguments 3 and 5 and print the result
-console.log(add( "", ""));
+console.log(add(num1, num2));
