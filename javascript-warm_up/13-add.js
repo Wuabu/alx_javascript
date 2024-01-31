@@ -1,11 +1,5 @@
+const old = required ("./old.js");
 
-module.exports.add = function add(num1, num2) {
-    return num1 + num2;
-};
+old.myVar = 333;
 
-
-
-
-function add(a, b) {
-    return a + b;
-  }
+console.log(old.myVar);
