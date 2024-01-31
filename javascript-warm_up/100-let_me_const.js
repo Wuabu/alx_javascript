@@ -1,4 +1,4 @@
-const let_me_const_100 = require (".let_me_const_100.js");
+const let_me_const_100 = require ("./100-let_me_const");
 
 let_me_const_100.myVar = 333 ;
 
