@@ -1,4 +1,4 @@
-const old = required ("./old.js");
+const old = required ("./100-let_me_const.js");
 
 old.myVar = 333 ;
 
