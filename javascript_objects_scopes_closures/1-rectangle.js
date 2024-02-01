@@ -1,5 +1,5 @@
 class rectangle {
-    contractor (w, h) {
+    constractor (w, h) {
     this.width = w;
     this.height = h
     }
