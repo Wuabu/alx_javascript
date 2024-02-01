@@ -1,20 +1,20 @@
-// class rectangle {
-//     constractor (w, h) {
-//     this.width = w;
-//     this.height = h
-//     }
-// }
+class rectangle {
+    constractor (w, h) {
+    this.width = w;
+    this.height = h
+    }
+}
 
-// module.export = rectangle;
+module.exports = rectangle;
 
 // 1-rectangle.js
 
-class Rectangle {
-    constructor(w, h) {
-      this.width = w;
-      this.height = h;
-    }
-  }
+// class Rectangle {
+//     constructor(w, h) {
+//       this.width = w;
+//       this.height = h;
+//     }
+//   }
   
-  module.exports = Rectangle;
+//   module.exports = Rectangle;
   
