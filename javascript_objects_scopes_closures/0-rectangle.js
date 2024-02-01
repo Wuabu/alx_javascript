@@ -1,8 +1,8 @@
+// 0-rectangle.js
+
 class Rectangle {
-    // Class methods and properties can be added here if needed
+    // Empty class
   }
   
-  // Example usage:
-  const myRectangle = new Rectangle();
-  console.log(myRectangle);
+  module.exports = Rectangle;
   
