@@ -1,11 +1,11 @@
-class rectangle {
-    constractor (w, h) {
+class Rectangle {
+    constructor (w, h) {
     this.width = w;
     this.height = h;
     }
 }
 
-module.exports = rectangle;
+module.exports = Rectangle;
 
 // 1-rectangle.js
 
