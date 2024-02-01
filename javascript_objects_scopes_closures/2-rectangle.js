@@ -26,5 +26,5 @@ class Rectangle {
     }
   }
   
-//   module.exports = Rectangle;
+  module.exports = Rectangle;
   
