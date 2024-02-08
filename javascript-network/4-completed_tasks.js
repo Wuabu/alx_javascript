@@ -1,9 +1,8 @@
 const request = require('request');
 
-// API URL for todos
+// API URL for tasks
 const apiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
-// Make a GET request to the API URL
 request(apiUrl, (error, response, body) => {
   if (error) {
     console.error('Error:', error);
@@ -12,25 +11,24 @@ request(apiUrl, (error, response, body) => {
 
   if (response.statusCode === 200) {
     // Parse the JSON response
-    const todos = JSON.parse(body);
+    const tasks = JSON.parse(body);
 
-    // Create an object to store completed tasks count by user id
-    const completedTasksByUser = {};
+    // Create an object to store the count of each number from 1 to 10
+    const numberCount = {};
 
-    // Iterate through todos and count completed tasks for each user
-    todos.forEach((todo) => {
-      if (todo.completed) {
-        const userId = todo.userId;
+    // Iterate through tasks and count occurrences of each number from 1 to 10
+    for (let i = 1; i <= 10; i++) {
+      numberCount[i] = 0;
+    }
 
-        // Increment the completed tasks count for the user
-        completedTasksByUser[userId] = (completedTasksByUser[userId] || 0) + 1;
-      }
+    tasks.forEach((task) => {
+      const userId = task.userId;
+
+      // Increment the count for the user ID
+      numberCount[userId]++;
     });
 
-    // Print users with completed tasks
-    Object.keys(completedTasksByUser).forEach((userId) => {
-      console.log(`${userId}: ${completedTasksByUser[userId]}`);
-    });
+    console.log(numberCount);
   } else {
     console.error(`Error: Received status code ${response.statusCode} from the API.`);
   }
