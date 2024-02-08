@@ -38,7 +38,7 @@ request(apiUrl, (error, response, body) => {
 
     // Check if the movie data is valid
     if (movieData.title) {
-      console.log(`Title of Star Wars Episode ${movieId}: ${movieData.title}`);
+      console.log(`${movieData.title}`);
     } else {
       console.error('Invalid movie data received from the API.');
     }
