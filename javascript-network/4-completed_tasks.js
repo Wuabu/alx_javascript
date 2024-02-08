@@ -29,7 +29,7 @@ request(apiUrl, (error, response, body) => {
 
     // Print users with completed tasks
     Object.keys(completedTasksByUser).forEach((userId) => {
-      console.log(`User ${userId}: ${completedTasksByUser[userId]} completed tasks`);
+      // console.log(`User ${userId}: ${completedTasksByUser[userId]} completed tasks`);
     });
   } else {
     console.error(`Error: Received status code ${response.statusCode} from the API.`);
