@@ -1,51 +1,43 @@
 const request = require('request');
 
 // Function to get characters for a specific movie
-function getCharactersForMovie(movieId) {
+async function getCharactersForMovie(movieId) {
   const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-  // Make a GET request to the Star Wars API
-  request(apiUrl, (error, response, body) => {
-    if (error) {
-      console.error('Error:', error);
-      process.exit(1);
-    }
+  try {
+    // Make a GET request to the Star Wars API
+    const movieResponse = await promisifiedRequest(apiUrl);
+    const movie = JSON.parse(movieResponse.body);
 
-    if (response.statusCode === 200) {
-      // Parse the JSON response
-      const movie = JSON.parse(body);
+    // Create an array to store promises for character requests
+    const characterPromises = movie.characters.map(async (characterUrl) => {
+      // Make a GET request for each character
+      const characterResponse = await promisifiedRequest(characterUrl);
+      const character = JSON.parse(characterResponse.body);
+      return `- ${character.name}`;
+    });
 
-      // Create an array to store promises for character requests
-      const characterPromises = movie.characters.map((characterUrl) => {
-        // Return a promise for each character
-        return new Promise((resolve, reject) => {
-          // Make a GET request for each character
-          request(characterUrl, (charError, charResponse, charBody) => {
-            if (charError) {
-              reject(charError);
-            } else if (charResponse.statusCode === 200) {
-              const character = JSON.parse(charBody);
-              resolve(`- ${character.name}`);
-            } else {
-              reject(`Error: Received status code ${charResponse.statusCode} for character.`);
-            }
-          });
-        });
-      });
+    // Wait for all promises to resolve
+    const characterResults = await Promise.all(characterPromises);
 
-      // Wait for all promises to resolve
-      Promise.all(characterPromises)
-        .then((characterResults) => {
-          // Display characters for the movie
-          console.log(`Characters for ${movie.title} (Episode ${movie.episode_id}):`);
-          console.log(characterResults.join('\n'));
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    } else {
-      console.error(`Error: Received status code ${response.statusCode} from the API.`);
-    }
+    // Display characters for the movie
+    console.log(`Characters for ${movie.title} (Episode ${movie.episode_id}):`);
+    console.log(characterResults.join('\n'));
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// Promisified version of the request function
+function promisifiedRequest(url) {
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ response, body });
+      }
+    });
   });
 }
 
