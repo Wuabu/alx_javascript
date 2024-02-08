@@ -25,7 +25,7 @@ request(url, (error, response, body) => {
         console.error('Error writing to file:', err);
         process.exit(1);
       }
-      console.log('File contents successfully written to:', filePath);
+      console.log( filePath);
     });
   } else {
     console.error(`Error: Received status code ${response.statusCode} from the URL.`);
