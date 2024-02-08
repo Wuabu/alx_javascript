@@ -15,21 +15,34 @@ function getCharactersForMovie(movieId) {
       // Parse the JSON response
       const movie = JSON.parse(body);
 
-      // Display characters for the movie
-      console.log(`Characters for ${movie.title} (Episode ${movie.episode_id}):`);
-      movie.characters.forEach((characterUrl) => {
-        // Make a GET request for each character
-        request(characterUrl, (charError, charResponse, charBody) => {
-          if (charError) {
-            console.error('Error:', charError);
-          } else if (charResponse.statusCode === 200) {
-            const character = JSON.parse(charBody);
-            console.log(`- ${character.name}`);
-          } else {
-            console.error(`Error: Received status code ${charResponse.statusCode} for character.`);
-          }
+      // Create an array to store promises for character requests
+      const characterPromises = movie.characters.map((characterUrl) => {
+        // Return a promise for each character
+        return new Promise((resolve, reject) => {
+          // Make a GET request for each character
+          request(characterUrl, (charError, charResponse, charBody) => {
+            if (charError) {
+              reject(charError);
+            } else if (charResponse.statusCode === 200) {
+              const character = JSON.parse(charBody);
+              resolve(`- ${character.name}`);
+            } else {
+              reject(`Error: Received status code ${charResponse.statusCode} for character.`);
+            }
+          });
         });
       });
+
+      // Wait for all promises to resolve
+      Promise.all(characterPromises)
+        .then((characterResults) => {
+          // Display characters for the movie
+          console.log(`Characters for ${movie.title} (Episode ${movie.episode_id}):`);
+          console.log(characterResults.join('\n'));
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     } else {
       console.error(`Error: Received status code ${response.statusCode} from the API.`);
     }
