@@ -1,4 +1,3 @@
-// studentHogwarts module
 const studentHogwarts = () => {
     let privateScore = 0;
     let name = null;
@@ -23,7 +22,6 @@ const studentHogwarts = () => {
     };
   };
   
-  // Creating instances
   const harry = studentHogwarts();
   harry.setName('Harry');
   harry.rewardStudent();
