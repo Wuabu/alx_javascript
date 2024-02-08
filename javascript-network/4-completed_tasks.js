@@ -27,10 +27,8 @@ request(apiUrl, (error, response, body) => {
       }
     });
 
-    // Print users with completed tasks
-    Object.keys(completedTasksByUser).forEach((userId) => {
-      console.log(`${userId}: ${completedTasksByUser[userId]} `);
-    });
+    // Print the completed tasks by user as an object
+    console.log(completedTasksByUser);
   } else {
     console.error(`Error: Received status code ${response.statusCode} from the API.`);
   }
