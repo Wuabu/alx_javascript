@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <script>
+        // Check if local storage is available
+        if (typeof(Storage) === "undefined") {
+            alert("Sorry, your browser does not support Web storage. Try again with a better one");
+        } else {
+            // Array of available items
+            const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+            // Function to add item to cart
+            function addItemToCart(item) {
+                localStorage.setItem(item, true);
+                displayCart();
+            }
+
+            // Function to create the store
+            function createStore() {
+                const ul = document.createElement('ul');
+
+                // Loop through available items and create list items
+                availableItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+
+                    // Add click event to call addItemToCart
+                    li.addEventListener('click', () => addItemToCart(item));
+
+                    ul.appendChild(li);
+                });
+
+                // Append the ul to the body
+                document.body.appendChild(ul);
+            }
+
+            // Function to display cart
+            function displayCart() {
+                const cartItems = Object.keys(localStorage);
+
+                // Check if the cart is not empty
+                if (cartItems.length > 0) {
+                    const message = `You previously had ${cartItems.length} items in your cart`;
+                    const p = document.createElement('p');
+                    p.textContent = message;
+
+                    // Append the message to the body
+                    document.body.appendChild(p);
+                }
+            }
+
+            // Call functions to set up the application
+            createStore();
+            displayCart();
+        }
+    </script>
+</body>
+</html>
