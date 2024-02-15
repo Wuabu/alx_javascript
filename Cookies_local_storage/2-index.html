@@ -17,7 +17,7 @@
             const emailValue = document.getElementById('email').value;
 
             const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 10); // Expires in 10 days
+            expirationDate.setDate(expirationDate.getDate() + 10); 
 
             document.cookie = `firstname=${firstnameValue}; expires=${expirationDate.toUTCString()}`;
             document.cookie = `email=${emailValue}; expires=${expirationDate.toUTCString()}`;
@@ -41,7 +41,6 @@
             const cookiesParagraph = document.createElement('p');
             cookiesParagraph.innerHTML = `Email: ${emailValue} - Firstname: ${firstnameValue}`;
             
-            // Remove existing paragraph before adding a new one
             const existingParagraph = document.querySelector('#cookiesParagraph');
             if (existingParagraph) {
                 existingParagraph.remove();

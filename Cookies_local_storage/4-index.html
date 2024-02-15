@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+<body>
+    <div id="loginForm" style="display: none;">
+        <h2>Login Form</h2>
+        <input type="text" id="firstname" placeholder="First Name">
+        <input type="text" id="email" placeholder="Email">
+        <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+        <button onclick="showCookies()">Show the cookies</button>
+    </div>
+
+    <script>
+        function setCookiesAndShowWelcomeMessage() {
+            const firstnameValue = document.getElementById('firstname').value;
+            const emailValue = document.getElementById('email').value;
+
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10); 
+
+            Cookies.set('firstname', firstnameValue, { expires: expirationDate });
+            Cookies.set('email', emailValue, { expires: expirationDate });
+
+            showWelcomeMessageOrForm();
+        }
+
+        function showCookies() {
+            const emailValue = Cookies.get('email');
+            const firstnameValue = Cookies.get('firstname');
+
+            const cookiesParagraph = document.createElement('p');
+            cookiesParagraph.innerHTML = `Email: ${emailValue} - Firstname: ${firstnameValue}`;
+
+            const existingParagraph = document.querySelector('#cookiesParagraph');
+            if (existingParagraph) {
+                existingParagraph.remove();
+            }
+
+            cookiesParagraph.id = 'cookiesParagraph';
+            document.body.appendChild(cookiesParagraph);
+
+            showWelcomeMessageOrForm();
+        }
+
+        function showForm() {
+            const welcomeMessage = document.querySelector('#welcomeMessage');
+            if (welcomeMessage) {
+                welcomeMessage.remove();
+            }
+
+            const loginForm = document.getElementById('loginForm');
+            loginForm.style.display = 'block';
+        }
+
+        function hideForm() {
+            const loginForm = document.getElementById('loginForm');
+            loginForm.style.display = 'none';
+        }
+
+        function deleteCookiesAndShowForm() {
+            Cookies.remove('firstname');
+            Cookies.remove('email');
+
+            showForm();
+        }
+
+        function showWelcomeMessageOrForm() {
+            const firstnameValue = Cookies.get('firstname');
+
+            const welcomeMessage = document.createElement('h1');
+            welcomeMessage.id = 'welcomeMessage';
+
+            if (firstnameValue) {
+                welcomeMessage.innerHTML = `Welcome ${firstnameValue} (<a href="#" onclick="deleteCookiesAndShowForm()">logout</a>)`;
+                welcomeMessage.style.fontStyle = 'italic';
+                welcomeMessage.style.fontWeight = 'normal';
+                welcomeMessage.style.position = 'relative';
+                welcomeMessage.style.left = '10px';
+
+                hideForm();
+            } else {
+                welcomeMessage.innerHTML = 'Welcome';
+                
+                showForm();
+            }
+
+            document.body.innerHTML = '';
+            document.body.appendChild(welcomeMessage);
+        }
+
+        showWelcomeMessageOrForm();
+    </script>
+</body>
+</html>
