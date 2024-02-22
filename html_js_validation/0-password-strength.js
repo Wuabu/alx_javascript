@@ -1,31 +1,28 @@
-// password-validation.js
 
 document.addEventListener("DOMContentLoaded", function() {
     const passwordForm = document.getElementById("passwordForm");
 
     passwordForm.addEventListener("submit", function(event) {
-        // Prevent the default form submission
         event.preventDefault();
 
-        // Retrieve the value entered in the password input field
+       
         const passwordInput = document.getElementById("password");
         const passwordValue = passwordInput.value;
 
-        // Call the validatePassword function
+        
         if (validatePassword(passwordValue)) {
-            // Allow form submission if the password meets the criteria
+            
             alert("Password is valid. Form submitted!");
-            // You can uncomment the line below to submit the form programmatically
-            // passwordForm.submit();
+            
         }
     });
 
     function validatePassword(password) {
         const errorElement = document.getElementById("error");
-        // Reset the error message
+        
         errorElement.textContent = "";
 
-        // Check if the password meets all the criteria
+        
         if (password.length < 8) {
             errorElement.textContent = "Password must be at least 8 characters long.";
             return false;
@@ -51,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return false;
         }
 
-        // If all criteria are met, return true
+        
         return true;
     }
 });
